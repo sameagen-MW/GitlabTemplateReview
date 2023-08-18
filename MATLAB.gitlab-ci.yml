@@ -3,10 +3,11 @@
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/MATLAB.gitlab-ci.yml
 
-# Use this template to run MATLAB and Simulink as part of your CI/CD pipeline. The template includes three jobs:
+# Use this template to run MATLAB and Simulink as part of your CI/CD pipeline. The template includes four jobs:
 # - `command`: Run MATLAB scripts, functions, and statements.
 # - `test`: Run tests authored using the MATLAB unit testing framework or Simulink Test.
 # - `test_artifacts`: Run MATLAB and Simulink tests, and generate test and coverage artifacts.
+# - `build`: Run builds using the MATLAB Build Tool.
 #
 # The jobs in the template use the `matlab -batch` syntax to start MATLAB. The `-batch` option is supported
 # in MATLAB R2019a and later.
@@ -110,3 +111,21 @@ test_artifacts:
 #
 # [8] https://www.mathworks.com/help/matlab/ref/matlab.unittest.plugins-package.html
 # [9] https://www.mathworks.com/help/matlab/matlab_prog/generate-artifacts-using-matlab-unit-test-plugins.html
+
+# The `build` job runs builds using the [`MATLAB Build Tool`][10]. To use the job in your pipeline you must have a
+# buildfile.m in the root of your repository and substitute `mytasks` with a space-separated list of tasks you
+# want to run.
+#
+build:
+  extends: .matlab_defaults
+  script: matlab -batch "buildtool mytasks"
+
+# The job leverages the MATLAB Build Tool for running builds. It uses the [`buildtool`][11] command with the
+# user-specified tasks and options. MATLAB exits with exit code 0 if the build executes successfully. Otherwise,
+# MATLAB terminates with a nonzero exit code, which causes the job to fail.
+#
+# The job will also fail if there is no buildfile.m in the root of the repository. The MATLAB Build Tool is
+# supported for MATLAB releases R2022b and later.
+#
+# [10] https://www.mathworks.com/help/matlab/matlab_prog/overview-of-matlab-build-tool.html
+# [11] https://www.mathworks.com/help/matlab/ref/buildtool.html
