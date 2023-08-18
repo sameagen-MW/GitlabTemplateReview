@@ -3,11 +3,11 @@
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/MATLAB.gitlab-ci.yml
 
-# Use this template to run MATLAB and Simulink as part of your CI/CD pipeline. The template includes four jobs:
+# Use this template to build and test your MATLAB project as part of your CI/CD pipeline. The template includes four jobs:
 # - `command`: Run MATLAB scripts, functions, and statements.
 # - `test`: Run tests authored using the MATLAB unit testing framework or Simulink Test.
 # - `test_artifacts`: Run MATLAB and Simulink tests, and generate test and coverage artifacts.
-# - `build`: Run builds using the MATLAB Build Tool.
+# - `build`: Run a build using the MATLAB Build Tool.
 #
 # The jobs in the template use the `matlab -batch` syntax to start MATLAB. The `-batch` option is supported
 # in MATLAB R2019a and later.
@@ -25,7 +25,7 @@
 # [2] https://www.mathworks.com/help/cloudcenter/ug/create-a-custom-matlab-container.html
 
 # The jobs in this template incorporate the contents of a hidden `.matlab_defaults` job. You need to
-# configure this job before running the `command`, `test`, and `test_artifacts` jobs. To configure the job:
+# configure this job before running the `command`, `test`, `test_artifacts`, and `build` jobs. To configure the job:
 # - Specify the name of the MATLAB container image you want to use.
 # - Set the `MLM_LICENSE_FILE` environment variable using the port number and DNS address for your network license manager.
 #
@@ -41,7 +41,7 @@
 #
 command:
   extends: .matlab_defaults
-  script: matlab -batch mycommand
+  script: matlab -batch "mycommand"
 
 # If you specify more than one script, function, or statement, use a comma or semicolon to separate them.
 # For example, to run `myscript.m` in a folder named `myfolder` located in the root of the repository,
@@ -51,7 +51,7 @@ command:
 #
 # MATLAB exits with exit code 0 if the specified script, function, or statement executes successfully without
 # error. Otherwise, MATLAB terminates with a nonzero exit code, which causes the job to fail. To have the
-# job fail in certain conditions, use the [`assert`][3] or [`error`][4] functions.
+# job fail in certain conditions, use the [`assert`][3] or [`error`][4] function.
 #
 # [3] https://www.mathworks.com/help/matlab/ref/assert.html
 # [4] https://www.mathworks.com/help/matlab/ref/error.html
@@ -72,9 +72,9 @@ test:
 # [7] https://www.mathworks.com/help/matlab/projects.html
 
 # The `test_artifacts` job runs your tests and additionally generates test and coverage artifacts.
-# It uses the plugin classes in the [`matlab.unittest.plugins`][8] package to generate a JUnit test results
-# report and a Cobertura code coverage report. Like the `test` job, this job runs all the tests in your
-# project and fails the build if any of the tests fail.
+# It uses the plugin classes in the [`matlab.unittest.plugins`][8] package to produce test results 
+# in JUnit-style XML format and code coverage results in Cobertura XML format. Like the `test` job, 
+# this job runs all the tests in your project and fails the build if any of the tests fail.
 #
 test_artifacts:
   extends: .matlab_defaults
@@ -118,7 +118,7 @@ test_artifacts:
 #
 build:
   extends: .matlab_defaults
-  script: matlab -batch "buildtool mytasks"
+  script: matlab -batch "buildtool mytask"
 
 # The job leverages the MATLAB Build Tool for running builds. It uses the [`buildtool`][11] command with the
 # user-specified tasks and options. MATLAB exits with exit code 0 if the build executes successfully. Otherwise,
