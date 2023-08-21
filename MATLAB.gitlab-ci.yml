@@ -113,21 +113,21 @@ test_artifacts:
 # [9] https://www.mathworks.com/help/matlab/matlab_prog/generate-artifacts-using-matlab-unit-test-plugins.html
 
 # Starting in R2022b, the `build` job runs a build using the MATLAB build tool. You can use this job to run the 
-# tasks specified in a file named "buildfile.m" in the root of your repository. To use the job in your pipeline, 
-# substitute “mytask” with the tasks you want to run.
+# tasks specified in a file named `buildfile.m` in the root of your repository. To use the job in your pipeline, 
+# substitute `mytask` with the tasks you want to run.
 #
 build:
   extends: .matlab_defaults
   script: matlab -batch "buildtool mytask"
 
 # If you specify more than one task, use a space to separate them. If you do not specify any tasks, the job 
-# runs the default tasks in "buildfile.m" as well as all the tasks on which they depend. The job calls the 
+# runs the default tasks in `buildfile.m` as well as all the tasks on which they depend. The job calls the 
 # [`buildtool`][10] command to run a build using the tasks and options that you specify.
 #
 # MATLAB exits with exit code 0 if the build runs successfully. Otherwise, MATLAB terminates with a nonzero 
-# exit code, which causes the job to fail. When you use the `build` job, a file named "buildfile.m" must be in 
+# exit code, which causes the job to fail. When you use the `build` job, a file named `buildfile.m` must be in 
 # the root of your repository. For more information about the MATLAB build tool, 
-# see [`Create and Run Tasks Using Build Tool`][11].
+# see [Create and Run Tasks Using Build Tool][11].
 #
 # [10] https://www.mathworks.com/help/matlab/ref/buildtool.html
 # [11] https://www.mathworks.com/help/matlab/matlab_prog/create-and-run-tasks-using-build-tool.html
