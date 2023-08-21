@@ -45,7 +45,7 @@ command:
 
 # If you specify more than one script, function, or statement, use a comma or semicolon to separate them.
 # For example, to run `myscript.m` in a folder named `myfolder` located in the root of the repository,
-# you can specify `mycommand` like this:
+# you can specify `"mycommand"` like this:
 #
 # "addpath('myfolder'), myscript"
 #
