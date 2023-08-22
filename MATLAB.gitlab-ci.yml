@@ -7,7 +7,7 @@
 # - `command`: Run MATLAB scripts, functions, and statements.
 # - `test`: Run tests authored using the MATLAB unit testing framework or Simulink Test.
 # - `test_artifacts`: Run MATLAB and Simulink tests, and generate test and coverage artifacts.
-# - `build`: Run a build using the MATLAB Build Tool.
+# - `build`: Run a build using the MATLAB build tool.
 #
 # The jobs in the template use the `matlab -batch` syntax to start MATLAB. The `-batch` option is supported
 # in MATLAB R2019a and later.
