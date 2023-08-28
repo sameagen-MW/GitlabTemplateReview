@@ -62,7 +62,7 @@ test:
   extends: .matlab_defaults
   script: matlab -batch "results = runtests('IncludeSubfolders',true), assertSuccess(results);"
 
-# By default, the job includes any files in your [MATLAB Project][7] that have a `Test` label. If your repository
+# By default, the job includes any files in your [MATLAB project][7] that have a `Test` label. If your repository
 # does not have a MATLAB project, then the job includes all tests in the root of your repository or in any of
 # its subfolders.
 #
@@ -124,8 +124,7 @@ build:
 # [`buildtool`][10] command to run a build using the tasks and options that you specify.
 #
 # MATLAB exits with exit code 0 if the build runs successfully. Otherwise, MATLAB terminates with a nonzero 
-# exit code, which causes the job to fail. When you use the `build` job, a file named `buildfile.m` must be in 
-# the root of your repository. For more information about the MATLAB build tool, 
+# exit code, which causes the job to fail. For more information about the MATLAB build tool, 
 # see [Create and Run Tasks Using Build Tool][11].
 #
 # [10] https://www.mathworks.com/help/matlab/ref/buildtool.html
