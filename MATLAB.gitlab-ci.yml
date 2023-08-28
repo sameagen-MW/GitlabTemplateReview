@@ -14,7 +14,6 @@
 #
 # You can copy and paste one or more jobs in this template into your `.gitlab-ci.yml` file.
 # You should not add this template to an existing `.gitlab-ci.yml` file by using the `include:` keyword.
-#
 
 # Your runner must use the Docker executor to run MATLAB within a container. The [MATLAB Container on Docker Hub][1]
 # lets you run your build using MATLAB R2020b or a later release. If your build requires additional toolboxes, use a
@@ -112,16 +111,16 @@ test_artifacts:
 # [8] https://www.mathworks.com/help/matlab/ref/matlab.unittest.plugins-package.html
 # [9] https://www.mathworks.com/help/matlab/matlab_prog/generate-artifacts-using-matlab-unit-test-plugins.html
 
-# Starting in R2022b, the `build` job runs a build using the MATLAB build tool. You can use this job to run the 
-# tasks specified in a file named `buildfile.m` in the root of your repository. To use the job in your pipeline, 
-# substitute `mytask` with the tasks you want to run.
+# Starting in R2022b, the `build` job runs a build using the MATLAB build tool. When you use the `build` job, a file 
+# named `buildfile.m` must be in the root of your repository. You can use this job to run the tasks specified in 
+# `buildfile.m`. To use the job in your pipeline, substitute `mytask` with the tasks you want to run.
 #
 build:
   extends: .matlab_defaults
   script: matlab -batch "buildtool mytask"
 
 # If you specify more than one task, use a space to separate them. If you do not specify any tasks, the job 
-# runs the default tasks in `buildfile.m` as well as all the tasks on which they depend. The job calls the 
+# runs the default tasks in `buildfile.m` as well as all the tasks on which they depend. The job executes the 
 # [`buildtool`][10] command to run a build using the tasks and options that you specify.
 #
 # MATLAB exits with exit code 0 if the build runs successfully. Otherwise, MATLAB terminates with a nonzero 
