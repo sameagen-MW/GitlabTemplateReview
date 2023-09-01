@@ -118,10 +118,10 @@ build:
   extends: .matlab_defaults
   script: matlab -batch "buildtool"
 
-# The job runs the default tasks in `buildfile.m` as well as all the tasks on which they depend. If you wish to run a 
-# set of tasks other than the default, specify them as a space separated list following `buildtool`. For example, if you
-# wish to run `task1` and `task2` and their dependencies substitute `buildtool` with `buildtool task1 task2`.
-# The job executes the [`buildtool`][10] command to run a build using the tasks and options that you specify.
+# The job executes the [`buildtool`][10] command to run a build using the default tasks in `buildfile.m` 
+# as well as all the tasks on which they depend. To run specific tasks instead, specify them as a space-separated 
+# list in the job. For example, to run the tasks named `task1` and `task2` and their dependencies, substitute 
+# `"buildtool"` with `"buildtool task1 task2"`.
 #
 # MATLAB exits with exit code 0 if the build runs successfully. Otherwise, MATLAB terminates with a nonzero 
 # exit code, which causes the job to fail. For more information about the MATLAB build tool, 
